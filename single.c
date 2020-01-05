@@ -24,8 +24,6 @@
 	/******************************************/
 	void add_at (int pos, int data){
 
-		//struct node_t *node = (struct node_t*) malloc (sizeof(struct node_t));
-
 		node_t *node = malloc(sizeof(node_t) *1);
 		node -> data = data;
 		node -> next = NULL;
@@ -65,6 +63,8 @@
 		/* middle of list */
 		prev -> next = node;
 		node -> next = cur;
+
+		free(node);
 	}
 
 	/*********************************/
@@ -97,6 +97,50 @@
 
 	}
 
+	/* removes a certain item from the linked list */
+	void remove_item(int data){
+		node_t *prev = NULL;
+		node_t *cur = head;
+
+		while(cur != NULL && cur->data != data){
+			prev = cur;
+			cur = cur->next;
+		}
+
+		/* no data, return */
+		if (cur == NULL){
+			return;
+		}
+
+		if (prev == NULL){
+			if(cur->next == NULL){
+				head = NULL;
+			} else {
+				head = cur -> next;
+			}
+
+			free(cur);
+			return;
+		}
+
+		/* last item in the list */
+		if(cur->next == NULL) {
+			prev->next = NULL;
+
+			free(cur);
+			return;
+		}
+
+		/* item in the middle of list */
+		if (prev != NULL && cur -> next != NULL){
+			prev -> next = cur-> next;
+
+			free(cur);
+			return;
+		}
+
+	}
+
 	int main(int argc, char **argv) {
 		add_end(2);
 		add_end(3);
@@ -104,7 +148,13 @@
 		add_beginning(1);
 		add_at(3, 4);
 
-		printf("first:\n");
+		printf("After adding...\n");
+		print_list();
+
+		remove_item(1);
+		remove_item(3);
+		remove_item(5);
+		printf("After removals...\n");
 		print_list();
 
 		return 0;
