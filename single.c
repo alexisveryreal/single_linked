@@ -12,7 +12,7 @@
 	/* struct for node */
 	typedef struct note_t {
 		int data;
-		struct node_t *next
+		struct node_t *next;
 	} node_t;
 
 	node_t *head = NULL;
@@ -24,7 +24,7 @@
 	/******************************************/
 	void add_at (int pos, int data){
 
-		note_t *node = malloc(sizeof(note_t) * 1);
+		node_t *node = malloc(sizeof(node_t) * 1);
 		node -> data = data;
 		node -> next = NULL;
 
@@ -42,15 +42,24 @@
 
 		/* loop until position found, OR end */
 		while (cur != NULL && index != pos){
-			++idx;
+			++index;
 			prev = cur;
 			cur = cur -> next;
 		}
 
+		/* head update */
+		if (index == 0) {
+			head = node;
+			node -> next = cur;
+			return;
+		}
 
+		/* reached end */
+		if (cur == NULL) {
+			prev -> next = node;
+			return;
+		}
 
-
-
-
-
+		prev -> next = node;
+		node -> next = cur;
 	}
