@@ -10,7 +10,7 @@
 	#include <stdlib.h>
 
 	/* struct for node */
-	typedef struct note_t {
+	typedef struct node_t {
 		int data;
 		struct node_t *next;
 	} node_t;
@@ -24,7 +24,9 @@
 	/******************************************/
 	void add_at (int pos, int data){
 
-		node_t *node = malloc(sizeof(node_t) * 1);
+		//struct node_t *node = (struct node_t*) malloc (sizeof(struct node_t));
+
+		node_t *node = malloc(sizeof(node_t) *1);
 		node -> data = data;
 		node -> next = NULL;
 
@@ -44,7 +46,7 @@
 		while (cur != NULL && index != pos){
 			++index;
 			prev = cur;
-			cur = cur -> next;
+			cur = cur->next;
 		}
 
 		/* head update, begin of list */
