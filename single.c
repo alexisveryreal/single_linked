@@ -141,6 +141,7 @@
 
 	/* destroys the list */
 	void destroy_list(){
+		printf("Destroying list >:D...\n");
 		node_t *temp = head;
 
 		while(head->next != NULL){
@@ -151,6 +152,7 @@
 		temp = head;
 		head = NULL;
 		free(temp);
+		printf("List destroyed :-)\n");
 	}
 
 	int main(int argc, char **argv) {
