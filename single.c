@@ -63,8 +63,6 @@
 		/* middle of list */
 		prev -> next = node;
 		node -> next = cur;
-
-		free(node);
 	}
 
 	/*********************************/
@@ -141,6 +139,20 @@
 
 	}
 
+	/* destroys the list */
+	void destroy_list(){
+		node_t *temp = head;
+
+		while(head->next != NULL){
+			temp = head->next;
+			head->next = temp->next;
+			free(temp);
+		}
+		temp = head;
+		head = NULL;
+		free(temp);
+	}
+
 	int main(int argc, char **argv) {
 		add_end(2);
 		add_end(3);
@@ -156,6 +168,8 @@
 		remove_item(5);
 		printf("After removals...\n");
 		print_list();
+
+		destroy_list();
 
 		return 0;
 	}
