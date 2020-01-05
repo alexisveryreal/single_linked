@@ -95,6 +95,19 @@
 
 	}
 
+	int main(int argc, char **argv) {
+		add_end(2);
+		add_end(3);
+		add_end(5);
+		add_beginning(1);
+		add_at(3, 4);
+
+		printf("first:\n");
+		print_list();
+
+		return 0;
+	}
+
 
 
 
